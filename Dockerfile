@@ -9,11 +9,6 @@ RUN apt-get update && \
     adduser -u 1000 -G nonroot -D -H -g "" nonroot && \
     ln -sf /dev/stdout /usr/local/nginx/logs/access.log && \
     ln -sf /dev/stderr /usr/local/nginx/logs/error.log && \
-    # ln -sf /tmp /usr/local/nginx/client_body_temp && \
-    # ln -sf /tmp /usr/local/nginx/proxy_temp && \
-    # ln -sf /tmp /usr/local/nginx/fastcgi_temp && \
-    # ln -sf /tmp /usr/local/nginx/uwsgi_temp && \
-    # ln -sf /tmp /usr/local/nginx/scgi_temp && \
     rm -rf /etc/services.d && \
     rm -rf /etc/conf-init.d && \
     rm -rf /etc/conf-finish.d && \
