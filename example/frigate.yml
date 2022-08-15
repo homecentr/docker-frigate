@@ -1,0 +1,18 @@
+mqtt:
+  host: mqtt
+  port: 1883
+
+cameras:
+  camera_1:
+    ffmpeg:
+      inputs:
+        - path: rtsp://10.0.10.10:554/rtsp
+          roles:
+            - detect
+            - rtmp
+    detect:
+      width: 1280
+      height: 720
+    motion:
+      mask:
+        - 0,461,3,0,1919,0,1919,843,1699,492,1344,458,1346,336,973,317,869,375,866,432

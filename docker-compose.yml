@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  image:
+    build: .
+    image: homecentr/frigate:preview
+    #image: alpine
+    #command: sh -c 'sleep 3600'
+    depends_on:
+      - mqtt
+    networks:
+      internal:
+    ports:
+      - "5000:5000"
+      - "1935:1935"
+    volumes:
+      - "./example/frigate.yml:/config/config.yml:ro"
+
+  mqtt:
+    image: eclipse-mosquitto
+    ports:
+      - "1883:1883"
+    volumes:
+      - "./example/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro"
+    networks:
+      internal:
+
+networks:
+  internal:
+    driver: bridge
