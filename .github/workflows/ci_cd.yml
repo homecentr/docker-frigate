@@ -14,7 +14,7 @@ jobs:
 
       - uses: homecentr/action-build-docker-image@master
         with:
-          imageName: "homecentr/mailrelay"
+          imageName: "homecentr/frigate"
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           dockerHubUserName: ${{ secrets.DOCKERHUB_USERNAME }}
           dockerHubPassword: ${{ secrets.DOCKERHUB_PASSWORD }}

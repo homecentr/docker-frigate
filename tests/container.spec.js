@@ -1,9 +1,9 @@
 const path = require("path");
-const nodemailer = require("nodemailer");
+const axios = require("axios");
 const { DockerComposeEnvironment } = require("testcontainers");
 
-describe("MailRelay container should", () => {
-    var mailRelayContainer;
+describe("Frigate container should", () => {
+    var frigateContainer;
     var composeEnvironment;
 
     beforeAll(async () => {
@@ -13,26 +13,22 @@ describe("MailRelay container should", () => {
             .withBuild()
             .up();
 
-        mailRelayContainer = composeEnvironment.getContainer("image_1");
+        frigateContainer = composeEnvironment.getContainer("image_1");
     });
 
     afterAll(async () => {
         await composeEnvironment.down();
     });
 
-    it("Listen on configured port", async () => {
+    it("Listen on web ui port", async () => {
         // Arrange
-        const transporter = nodemailer.createTransport({
-            host: 'localhost',
-            port: mailRelayContainer.getMappedPort(2525)
-        });
+        const port = frigateContainer.getMappedPort(5000);
+        const url = `http://localhost:${port}/`
 
         // Act
-        await transporter.sendMail({
-            from: "sender@test.com",
-            to: "recipient@example.com",
-            subject: 'Test Email Subject',
-            html: 'Example HTML Message Body'
-        });
+        const response = await axios.get(url);
+
+        // Assert
+        expect(response.status).toBe(200);
     });
 });
