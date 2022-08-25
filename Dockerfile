@@ -1,4 +1,4 @@
-FROM blakeblackshear/frigate:0.10.0-amd64
+FROM blakeblackshear/frigate:0.11.0-0cf759a
 
 ARG USER_UID=1000
 ARG USER_GID=1000
